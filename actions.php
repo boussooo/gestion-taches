@@ -2,7 +2,7 @@
 // session_start();
 include 'db.php';
 
-// --- 1️⃣ GESTION DES TÂCHES ---
+// --- GESTION DES TÂCHES ---
 
 // Ajouter une tâche
 if(isset($_POST['action']) && $_POST['action'] == 'ajouter'){
@@ -57,16 +57,7 @@ if(isset($_GET['reprendre'])){
     exit;
 }
 
-// --- 2️⃣ GESTION DES UTILISATEURS (ADMIN UNIQUEMENT) ---
-// if($_SESSION['profil'] != 'admin'){
-//     // Si ce n'est pas admin, bloquer toute action utilisateur
-//     if(isset($_POST['action']) && in_array($_POST['action'], ['ajouter_user','modifier_user'])){
-//         die("Action interdite : Admin uniquement.");
-//     }
-//     if(isset($_GET['supprimer_user'])){
-//         die("Action interdite : Admin uniquement.");
-//     }
-// }
+// ---  GESTION DES UTILISATEURS (ADMIN UNIQUEMENT) ---
 
 // Ajouter un utilisateur
 if(isset($_POST['action']) && $_POST['action'] == 'ajouter_user'){
@@ -111,12 +102,12 @@ if(isset($_GET['supprimer_user'])){
     exit;
 }
 
-// --- 3️⃣ RECUPÉRATION DES TÂCHES (POUR INDEX.PHP) ---
+// --- RECUPÉRATION DES TÂCHES ) ---
 $stmt = $pdo->prepare("SELECT * FROM tache ORDER BY date_creation DESC");
 $stmt->execute();
 $taches = $stmt->fetchAll();
 
-// --- 4️⃣ MODIFICATION D'UNE TÂCHE (POUR INDEX.PHP) ---
+// ---  MODIFICATION D'UNE TÂCHE ) ---
 $tache_a_modifier = null;
 if(isset($_GET['modifier'])){
     $id_tache = $_GET['modifier'];
@@ -125,3 +116,4 @@ if(isset($_GET['modifier'])){
     $tache_a_modifier = $stmt->fetch();
 }
 ?>
+
